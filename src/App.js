@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
 import Todo from "./routes/Todo";
 import Calender from "./routes/Calender";
-
+import Counter from "./routes/Counter";
 function App() {
 	return (
 		<BrowserRouter>
@@ -11,6 +11,7 @@ function App() {
 				<Route path="/*" element={<Home />} />
 				<Route path="/calender" element={<Calender />} />
 				<Route path="/Todo" element={<Todo />} />
+				<Route path="/Counter" element={<Counter />} />
 			</Routes>
 		</BrowserRouter>
 	);

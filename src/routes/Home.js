@@ -11,6 +11,9 @@ const Home = () => {
 			<h3>
 				<Link to="/todo">todo</Link>
 			</h3>
+			<h3>
+				<Link to="/counter">counter</Link>
+			</h3>
 		</div>
 	);
 };
