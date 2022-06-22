@@ -1,7 +1,19 @@
-import "./App.css";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./routes/Home";
+import Todo from "./routes/Todo";
+import Calender from "./routes/Calender";
 
 function App() {
-	return <div className="App">asd</div>;
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/*" element={<Home />} />
+				<Route path="/calender" element={<Calender />} />
+				<Route path="/Todo" element={<Todo />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
