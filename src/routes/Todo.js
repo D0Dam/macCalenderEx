@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { addTodo, removeTodo } from "../store/store";
 const Todo = ({ todos, dispatchAddTodo, dispatchRemoveTodo }) => {
 	const [text, setText] = useState("");
@@ -16,6 +17,9 @@ const Todo = ({ todos, dispatchAddTodo, dispatchRemoveTodo }) => {
 	};
 	return (
 		<div>
+			<h1>
+				<Link to="/">Go Home</Link>
+			</h1>
 			<h1>TODO</h1>
 			<form onSubmit={onSubmit}>
 				<input
