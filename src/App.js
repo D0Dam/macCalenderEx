@@ -4,6 +4,7 @@ import Home from "./routes/Home";
 import Todo from "./routes/Todo";
 import Calender from "./routes/Calender";
 import Counter from "./routes/Counter";
+import "./styles/App.css";
 function App() {
 	return (
 		<BrowserRouter>

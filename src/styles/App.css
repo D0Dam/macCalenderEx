@@ -1,0 +1,46 @@
+@font-face {
+	font-family: "Pretendard-M";
+	src: url("./fonts/Pretendard/Pretendard-Medium.woff");
+}
+
+@font-face {
+	font-family: "Pretendard-T";
+	src: url("./fonts/Pretendard/Pretendard-Thin.woff");
+}
+
+@font-face {
+	font-family: "Pretendard-L";
+	src: url("./fonts/Pretendard/Pretendard-Light.woff");
+}
+
+@font-face {
+	font-family: "BMJUA";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SUIT-Medium";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2")
+		format("woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "SUIT-ExtraLight";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-ExtraLight.woff2")
+		format("woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Cafe24Ssurround";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}

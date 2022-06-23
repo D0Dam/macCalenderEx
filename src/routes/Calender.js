@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
+const CalenderContainer = styled.div`
+	font-family: "Cafe24Ssurround";
+`;
 const MainCalender = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -19,10 +22,9 @@ const Days = styled.div`
 	height: 2.4rem;
 `;
 const Day = styled.div`
-	width: 2.4rem;
 	height: 2.4rem;
 	font-size: 1.6rem;
-	text-align: center;
+	text-align: right;
 `;
 const Dates = styled.div`
 	display: grid;
@@ -33,9 +35,8 @@ const Dates = styled.div`
 
 const DateItem = styled.div`
 	font-size: 1.2rem;
-	width: 2.4rem;
-	height: 2.4rem;
-	text-align: center;
+	height: 4.8rem;
+	text-align: right;
 	${(props) => {
 		if (
 			props.id ===
@@ -137,7 +138,7 @@ const Calender = ({ background }) => {
 		paintCalender(year, month);
 	}, [year, month]);
 	return (
-		<div>
+		<CalenderContainer>
 			<h1>
 				<Link to="/">Go Home</Link>
 			</h1>
@@ -168,7 +169,7 @@ const Calender = ({ background }) => {
 					</Dates>
 				</MainCalender>
 			</div>
-		</div>
+		</CalenderContainer>
 	);
 };
 
