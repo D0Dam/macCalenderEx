@@ -14,15 +14,7 @@
 }
 
 @font-face {
-	font-family: "BMJUA";
-	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff")
-		format("woff");
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "SUIT-Medium";
+	font-family: "SUIT-M";
 	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2")
 		format("woff2");
 	font-weight: normal;
@@ -30,17 +22,9 @@
 }
 
 @font-face {
-	font-family: "SUIT-ExtraLight";
+	font-family: "SUIT-EL";
 	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-ExtraLight.woff2")
 		format("woff2");
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "Cafe24Ssurround";
-	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
-		format("woff");
 	font-weight: normal;
 	font-style: normal;
 }

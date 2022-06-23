@@ -2,14 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const CalenderContainer = styled.div`
-	font-family: "Cafe24Ssurround";
-`;
+const CalenderContainer = styled.div``;
 const MainCalender = styled.div`
 	display: flex;
 	flex-direction: column;
+	font-family: "SUIT-EL";
 `;
-
+const YearAndMonth = styled.div`
+	font-family: "SUIT-EL";
+`;
+const Buttons = styled.div`
+	display: flex;
+	align-items: center;
+`;
+const Button = styled.button`
+	font-family: "SUIT-EL";
+	border: white;
+	border-radius: 4px;
+	margin: 1.5px;
+	background-color: white;
+	box-shadow: 0px 0px 2.5px grey;
+	height: 1.2rem;
+	font-size: 0.8rem;
+`;
 const CalenderNav = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -31,12 +46,17 @@ const Dates = styled.div`
 	justify-content: space-between;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+	border-left: 0.05rem solid grey;
+	border-top: 0.05rem solid grey;
 `;
 
 const DateItem = styled.div`
 	font-size: 1.2rem;
-	height: 4.8rem;
+	height: 5.6rem;
 	text-align: right;
+	font-size: 1.2rem;
+	border-bottom: 0.05rem solid grey;
+	border-right: 0.05rem solid grey;
 	${(props) => {
 		if (
 			props.id ===
@@ -45,16 +65,8 @@ const DateItem = styled.div`
 				(new Date().getMonth() + 1) +
 				new Date().getDate()
 		) {
-			console.log(
-				"st",
-				props.key,
-				"D" +
-					new Date().getFullYear() +
-					(new Date().getMonth() + 1) +
-					new Date().getDate()
-			);
 			return css`
-				background: red;
+				color: blue;
 			`;
 		}
 	}}
@@ -142,17 +154,16 @@ const Calender = ({ background }) => {
 			<h1>
 				<Link to="/">Go Home</Link>
 			</h1>
-			<h1>Calender</h1>
 			<div>
 				<CalenderNav>
-					<div>
+					<YearAndMonth>
 						{year}년 {month}월
-					</div>
-					<div>
-						<button onClick={onClickPrev}>{`<`}</button>
-						<button onClick={onClickToday}>오늘</button>
-						<button onClick={onClickNext}>{`>`}</button>
-					</div>
+					</YearAndMonth>
+					<Buttons>
+						<Button onClick={onClickPrev}>{`<`}</Button>
+						<Button onClick={onClickToday}>오늘</Button>
+						<Button onClick={onClickNext}>{`>`}</Button>
+					</Buttons>
 				</CalenderNav>
 				<MainCalender className="mainCalender">
 					<Days className="days">
@@ -163,7 +174,7 @@ const Calender = ({ background }) => {
 					<Dates className="dates">
 						{paintCalender(year, month).map((d) => (
 							<DateItem key={d.id} id={d.id}>
-								{d.date}
+								<div>{d.date}일</div>
 							</DateItem>
 						))}
 					</Dates>
