@@ -8,8 +8,10 @@ const MainCalender = styled.div`
 	flex-direction: column;
 	font-family: "SUIT-EL";
 `;
+
 const YearAndMonth = styled.div`
 	font-family: "SUIT-EL";
+	margin-bottom: 0.4rem;
 `;
 const Buttons = styled.div`
 	display: flex;
@@ -32,44 +34,70 @@ const CalenderNav = styled.div`
 `;
 const Days = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(7, minmax(112px, auto));
 	width: 100%;
-	height: 2.4rem;
+	height: 100%;
 `;
 const Day = styled.div`
-	height: 2.4rem;
-	font-size: 1.6rem;
+	height: 100%;
+	font-size: 1.2rem;
 	text-align: right;
 `;
 const Dates = styled.div`
 	display: grid;
 	justify-content: space-between;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-	border-left: 0.05rem solid grey;
-	border-top: 0.05rem solid grey;
+	width: 100%;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: repeat(6, 1fr);
+	border-left: 0.05rem solid #dddddd;
+	border-top: 0.1rem solid #dfdfde;
 `;
 
 const DateItem = styled.div`
 	font-size: 1.2rem;
+	padding-top: 0.2rem;
+	width: 100%;
 	height: 5.6rem;
 	text-align: right;
-	font-size: 1.2rem;
-	border-bottom: 0.05rem solid grey;
-	border-right: 0.05rem solid grey;
+	font-size: 1rem;
+	border-bottom: 0.05rem solid #dddddd;
+	border-right: 0.05rem solid #dddddd !important;
+	border-collapse: collapse;
+	:nth-child(7n) {
+		background-color: #f7f7f7;
+	}
+	:nth-child(7n + 1) {
+		background-color: #f7f7f7;
+		color: #f94c66;
+	}
+	${(props) => {
+		if (props.month === "next" || props.month === "prev") {
+			return css`
+				color: #d1d1d1 !important;
+			`;
+		}
+	}}
+`;
+
+const DateItemText = styled.span`
+	margin: 2px;
 	${(props) => {
 		if (
-			props.id ===
+			props.textId ===
 			"D" +
 				new Date().getFullYear() +
 				(new Date().getMonth() + 1) +
 				new Date().getDate()
 		) {
 			return css`
-				color: blue;
+				padding: 0.15rem;
+				font-size: 0.9rem;
+				color: white;
+				border-radius: 40%;
+				background: #f94c66;
 			`;
 		}
-	}}
+	}};
 `;
 
 const Calender = ({ background }) => {
@@ -97,28 +125,41 @@ const Calender = ({ background }) => {
 				dates.unshift({
 					date: getLastDate(y, 12) - i,
 					id: "D" + y + 12 + (getLastDate(y, 12) - i),
+					month: "prev",
 				});
 			} else {
 				dates.unshift({
 					date: getLastDate(y, m - 1) - i,
 					id: "D" + y + (m - 1) + (getLastDate(y, m - 1) - i),
+					month: "prev",
 				});
 			}
 		}
 		for (let i = 1; i <= getLastDate(y, m); i++) {
-			dates.push({ date: i, id: "D" + y + m + i });
+			dates.push({ date: i, id: "D" + y + m + i, month: "this" });
 		}
-		for (let i = 1; i < 7 - getLastDay(y, m); i++) {
-			if (m === 12) {
-				dates.push({ date: i, id: "D" + y + 1 + i });
-			} else {
-				dates.push({ date: i, id: "D" + y + (m + 1) + i });
+		if (dates.length <= 35) {
+			for (let i = 1; i < 14 - getLastDay(y, m); i++) {
+				if (m === 12) {
+					dates.push({ date: i, id: "D" + y + 1 + i, month: "next" });
+				} else {
+					dates.push({ date: i, id: "D" + y + (m + 1) + i, month: "next" });
+				}
+			}
+		} else {
+			for (let i = 1; i < 7 - getLastDay(y, m); i++) {
+				if (m === 12) {
+					dates.push({ date: i, id: "D" + y + 1 + i, month: "next" });
+				} else {
+					dates.push({ date: i, id: "D" + y + (m + 1) + i, month: "next" });
+				}
 			}
 		}
+
 		console.log(new Date(y, m, 0).getDate());
 		console.log(new Date(y, m - 1, 1).getDay());
 		console.log(new Date(y, m, 0).getDay());
-		console.log(dates);
+		console.log(dates.length);
 		return dates;
 	};
 	const onClickPrev = () => {
@@ -151,10 +192,10 @@ const Calender = ({ background }) => {
 	}, [year, month]);
 	return (
 		<CalenderContainer>
-			<h1>
-				<Link to="/">Go Home</Link>
-			</h1>
 			<div>
+				<Link to="/" style={{ textDecoration: "none" }}>
+					<Button>{`<`} Go Home</Button>
+				</Link>
 				<CalenderNav>
 					<YearAndMonth>
 						{year}년 {month}월
@@ -173,8 +214,11 @@ const Calender = ({ background }) => {
 					</Days>
 					<Dates className="dates">
 						{paintCalender(year, month).map((d) => (
-							<DateItem key={d.id} id={d.id}>
-								<div>{d.date}일</div>
+							<DateItem key={d.id} id={d.id} month={d.month}>
+								<div>
+									<DateItemText textId={d.id}>{d.date}</DateItemText>
+									<span>일</span>
+								</div>
 							</DateItem>
 						))}
 					</Dates>
