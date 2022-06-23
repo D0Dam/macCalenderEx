@@ -1,6 +1,65 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const Calender = () => {
+import styled, { css } from "styled-components";
+
+const MainCalender = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+const CalenderNav = styled.div`
+	display: flex;
+	justify-content: space-between;
+	font-size: 2.4rem;
+`;
+const Days = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 100%;
+	height: 2.4rem;
+`;
+const Day = styled.div`
+	width: 2.4rem;
+	height: 2.4rem;
+	font-size: 1.6rem;
+	text-align: center;
+`;
+const Dates = styled.div`
+	display: grid;
+	justify-content: space-between;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+`;
+
+const DateItem = styled.div`
+	font-size: 1.2rem;
+	width: 2.4rem;
+	height: 2.4rem;
+	text-align: center;
+	${(props) => {
+		if (
+			props.id ===
+			"D" +
+				new Date().getFullYear() +
+				(new Date().getMonth() + 1) +
+				new Date().getDate()
+		) {
+			console.log(
+				"st",
+				props.key,
+				"D" +
+					new Date().getFullYear() +
+					(new Date().getMonth() + 1) +
+					new Date().getDate()
+			);
+			return css`
+				background: red;
+			`;
+		}
+	}}
+`;
+
+const Calender = ({ background }) => {
 	const today = new Date();
 	const days = ["일", "월", "화", "수", "목", "금", "토"];
 	const [year, setYear] = useState(today.getFullYear());
@@ -65,6 +124,10 @@ const Calender = () => {
 			setMonth(() => month + 1);
 		}
 	};
+	const onClickToday = () => {
+		setYear(today.getFullYear());
+		setMonth(today.getMonth() + 1);
+	};
 	useEffect(() => {
 		console.log("년도", year, month);
 		console.log("마지막 날, 첫, 마지막 요일");
@@ -72,7 +135,7 @@ const Calender = () => {
 		getFirstDay(year, month);
 		getLastDay(year, month);
 		paintCalender(year, month);
-	}, []);
+	}, [year, month]);
 	return (
 		<div>
 			<h1>
@@ -80,24 +143,30 @@ const Calender = () => {
 			</h1>
 			<h1>Calender</h1>
 			<div>
-				<div className="nav">
-					<div>{year}</div>
-					<div>{month}</div>
-					<button onClick={onClickPrev}>{`<`}</button>
-					<button onClick={onClickNext}>{`>`}</button>
-				</div>
-				<div className="mainCalender">
-					<div className="days">
+				<CalenderNav>
+					<div>
+						{year}년 {month}월
+					</div>
+					<div>
+						<button onClick={onClickPrev}>{`<`}</button>
+						<button onClick={onClickToday}>오늘</button>
+						<button onClick={onClickNext}>{`>`}</button>
+					</div>
+				</CalenderNav>
+				<MainCalender className="mainCalender">
+					<Days className="days">
 						{days.map((d, index) => (
-							<span key={index}> {d} |</span>
+							<Day key={index}>{d}</Day>
 						))}
-					</div>
-					<div className="dates">
+					</Days>
+					<Dates className="dates">
 						{paintCalender(year, month).map((d) => (
-							<span key={d.id}>{d.date} </span>
+							<DateItem key={d.id} id={d.id}>
+								{d.date}
+							</DateItem>
 						))}
-					</div>
-				</div>
+					</Dates>
+				</MainCalender>
 			</div>
 		</div>
 	);
