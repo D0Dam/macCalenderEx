@@ -34,7 +34,7 @@ const CalenderNav = styled.div`
 `;
 const Days = styled.div`
 	display: grid;
-	grid-template-columns: repeat(7, minmax(112px, auto));
+	grid-template-columns: repeat(7, 1fr);
 	width: 100%;
 	height: 100%;
 `;
@@ -90,7 +90,7 @@ const DateItemText = styled.span`
 				new Date().getDate()
 		) {
 			return css`
-				padding: 0.15rem;
+				padding: 0.15rem 0.4rem 0.15rem 0.4rem;
 				font-size: 0.9rem;
 				color: white;
 				border-radius: 40%;
